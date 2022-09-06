@@ -10,31 +10,26 @@
 
 int LEDBlinkState = 1;
 
+byte LEDPinArray[LED_PIN_ARRAY_SIZE] = 
+      {LED_1_PIN, LED_2_PIN, LED_3_PIN};
 
-void setup() {
-  Serial.begin(9600);
-  pinMode(PUSH_BUTTON, INPUT);
-  
-  pinMode(LED_1_PIN, OUTPUT);
-  pinMode(LED_2_PIN, OUTPUT);
-  pinMode(LED_3_PIN, OUTPUT);
-
-  digitalWrite(LED_1_PIN, 0);
-  digitalWrite(LED_2_PIN, 0);
-  digitalWrite(LED_3_PIN, 0);
-
-  
-
-
+void setLEDPinModes(){
+  for(int i = 0; i < LED_PIN_ARRAY_SIZE; i++){
+    pinMode(LEDPinArray[i], OUTPUT);
+    
+  }
 
 }
 
+void turnOffAllLEDs(){
+  for(int i = 0; i < LED_PIN_ARRAY_SIZE; i ++){
+    digitalWrite(LEDPinArray[LED_PIN_ARRAY_SIZE],0);
+  }
+}
 
-void loop() {
- 
-  if(digitalRead(PUSH_BUTTON) == LOW){
-
-    if(LEDBlinkState == 1) {
+void toggleLEDs(){
+  
+  if(LEDBlinkState == 1) {
       digitalWrite(LED_1_PIN, 1);
       digitalWrite(LED_2_PIN, 0);
       digitalWrite(LED_3_PIN, 1);
@@ -48,6 +43,23 @@ void loop() {
     
   }
     delay(300);
+}
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(PUSH_BUTTON, INPUT);
+
+  setLEDPinModes();
+
+  turnOffAllLEDs();
+}
+
+
+void loop() {
+ 
+  if(digitalRead(PUSH_BUTTON) == LOW){
+
+    toggleLEDs();
   }
   
 
