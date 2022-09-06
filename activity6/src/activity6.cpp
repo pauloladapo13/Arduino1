@@ -42,7 +42,6 @@ void toggleLEDs(){
     LEDBlinkState = 1;
     
   }
-    delay(300);
 }
 
 void setup() {
@@ -60,8 +59,7 @@ void loop() {
   if(digitalRead(PUSH_BUTTON) == LOW){
 
     toggleLEDs();
+    delay(300);
   }
-  
-
 
 }
