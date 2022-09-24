@@ -1,7 +1,7 @@
 #include <Arduino.h>
 
 void setup() {
-  Serial.begin(115200);
+  Serial.begin(9600);
   // to pass data to the arduino
   Serial.println("Hello");
 
